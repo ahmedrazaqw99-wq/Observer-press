@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f4f1ea;
+  --color-paper-dim: #e8e3d5;
+  --color-ink: #121212;
+  --color-muted: #5c5953;
+  --color-alert: #b91c1c;
+  --color-highlight: #e5decf;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-body: "Lora", Georgia, serif;
+}
+
+html, body {
+  @apply bg-paper text-ink font-sans antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  @apply bg-ink text-paper;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer components {
+  .container-editorial {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .news-border-b {
+    border-bottom: 1px solid rgba(18, 18, 18, 0.15);
+  }
+
+  .news-double-border {
+    border-top: 3px double rgba(18, 18, 18, 0.8);
+    border-bottom: 1px solid rgba(18, 18, 18, 0.8);
+  }
+
+  .btn-editorial {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-ink text-ink text-xs font-bold uppercase tracking-widest transition-all hover:bg-ink hover:text-paper cursor-pointer;
+  }
+
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.2em] text-muted;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
