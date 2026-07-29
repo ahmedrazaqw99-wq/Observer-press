@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Masthead } from './components/Masthead';
 import { FrontPageGrid } from './components/FrontPageGrid';
 import { ArticleReader } from './components/ArticleReader';
