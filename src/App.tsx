@@ -3,7 +3,7 @@ import { Masthead } from './components/Masthead';
 import { FrontPageGrid } from './components/FrontPageGrid';
 import { ArticleReader } from './components/ArticleReader';
 import { DEMO_ARTICLES, Article } from './data/news';
-import { BRAND } from './lib/brand';
+import { LiveHeadlines } from './components/LiveHeadlines';
 
 type Lang = 'ro' | 'en';
 
@@ -44,11 +44,14 @@ function App() {
       {selectedArticle ? (
         <ArticleReader article={selectedArticle} lang={lang} onBack={handleBack} />
       ) : (
-        <FrontPageGrid
-          articles={filteredArticles}
-          lang={lang}
-          onArticleSelect={handleArticleSelect}
-        />
+        <>
+          <FrontPageGrid
+            articles={filteredArticles}
+            lang={lang}
+            onArticleSelect={handleArticleSelect}
+          />
+          <LiveHeadlines lang={lang} />
+        </>
       )}
 
       <footer className="news-double-border mt-auto py-8">
