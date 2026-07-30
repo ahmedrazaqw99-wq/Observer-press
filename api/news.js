@@ -7,12 +7,12 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?language=en&pageSize=8&apiKey=${apiKey}`
+      `https://gnews.io/api/v4/top-headlines?lang=en&max=8&apikey=${apiKey}`
     );
     const data = await response.json();
 
-    if (data.status !== 'ok') {
-      return res.status(500).json({ error: data.message || 'Failed to fetch news' });
+    if (!data.articles) {
+      return res.status(500).json({ error: data.errors?.[0] || 'Failed to fetch news' });
     }
 
     const articles = data.articles.map((a, index) => ({
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       description: a.description,
       url: a.url,
       source: a.source?.name || 'Unknown',
-      image: a.urlToImage,
+      image: a.image,
       publishedAt: a.publishedAt,
     }));
 
@@ -30,4 +30,4 @@ export default async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ error: 'Something went wrong fetching news' });
   }
-        }
+}
