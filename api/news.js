@@ -15,15 +15,22 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: data.errors?.[0] || 'Failed to fetch news' });
     }
 
-    const articles = data.articles.map((a, index) => ({
-      id: `live-${index}`,
-      title: a.title,
-      description: a.description,
-      url: a.url,
-      source: a.source?.name || 'Unknown',
-      image: a.image,
-      publishedAt: a.publishedAt,
-    }));
+    const seen = new Set();
+    const articles = data.articles
+      .filter((a) => {
+        if (seen.has(a.title)) return false;
+        seen.add(a.title);
+        return true;
+      })
+      .map((a, index) => ({
+        id: `live-${index}`,
+        title: a.title,
+        description: a.description,
+        url: a.url,
+        source: a.source?.name || 'Unknown',
+        image: a.image,
+        publishedAt: a.publishedAt,
+      }));
 
     res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate');
     return res.status(200).json({ articles });
