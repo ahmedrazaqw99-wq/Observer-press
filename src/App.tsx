@@ -5,6 +5,7 @@ import { ArticleReader } from './components/ArticleReader';
 import { DEMO_ARTICLES, Article } from './data/news';
 import { LiveHeadlines } from './components/LiveHeadlines';
 import { BRAND } from './lib/brand';
+
 type Lang = 'ro' | 'en';
 
 function App() {
